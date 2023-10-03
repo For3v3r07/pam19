@@ -1,9 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer, TabActions } from '@react-navigation/native';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons'; 
 const Tab = createBottomTabNavigator();
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import cadastrar from './components/cadastrar';
+import consultar from './components/consultar';
 
 	Parse.setAsyncStorage(AsyncStorage);
   
@@ -12,10 +16,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+        name = 'cadastrar' compónent = {cadastrar} options ={{tabBarIcon:({color,size})=>(<Ionicons name="add-circle" size={24} color="black" />)}}
+        />
+        <Tab.Screen
+        name = 'consultar' compónent = {consultar} options ={{tabBarIcon:({color,size})=>(<Ionicons name="list" size={24} color="black" />)}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+    
   );
 }
 
